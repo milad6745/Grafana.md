@@ -78,3 +78,26 @@ grafana:
     tag: 10.3.3
 
 ```
+
+## create storage class for this project
+```
+cat storageclass.yml 
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-client
+provisioner: kubernetes.io/aws-ebs
+volumeBindingMode: Immediate
+```
+
+### install loki using helm
+```
+helm install loki-stack grafana/loki-stack --values values.yml -n loki --create-namespace
+```
+### check
+```
+helm list -n loki
+NAME      	NAMESPACE	REVISION	UPDATED                                  	STATUS  	CHART            	APP VERSION
+loki-stack	loki     	1       	2025-02-20 00:09:59.099481416 +0330 +0330	deployed	loki-stack-2.10.2	v2.9.3     
+```
+
