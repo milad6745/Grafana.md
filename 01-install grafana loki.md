@@ -58,6 +58,10 @@ prometheus-community/prometheus-druid-exporter  1.1.0           v0.11.0         
 cat /root/loki-stack.yml
 loki:
   enabled: true
+  persistence:
+    enable: true
+    storageClassName: nfs-client
+    size: 1Gi
 
 promtail:
   enabled: true
@@ -72,4 +76,5 @@ grafana:
       maxLines: 1000
   image:
     tag: 10.3.3
+
 ```
